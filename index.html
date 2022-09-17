@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="stylesheet.css">
+        <link rel="icon" href="sekigaeIcon.ico">
+		<title>
+			席替え＜座席設定＞
+		</title>
+	</head>
+
+	<body>
+<div id="progressWrap"><div class="progress" id="progress_roomSetting" data-progress="true">席替え<br>＜座席設定＞</div>
+<div class="progress" id="progress_roomNameSetting" data-progress="false">席替え<br>＜R設定＞</div>
+<div class="progress" id="progress_start" data-progress="false">席替え<br>＜振り分け＞</div></div>
+		<div id="RoomSettingWrap"><span class="ruleSentence">無効にする座席を選択</span>
+			<div id="blackboard">黒板</div>
+			<div id="RoomSetting"></div>
+		</div>
+		<button type="button" id="CompleteRoomSetting" class="blockElement">座席設定を送信</button>
+		<div id="RoomNameSettingWrap" class="hiddenElement">
+			<label class="ruleSentence blockElement">R名を入力
+				<input type="text" id="RoomNameSetting" value="R" class="blockElement">
+			</label>
+            <label class="ruleSentence blockElement">座席振り分け時に名前を設定
+                <input type="checkbox" id="whenSetStudentName">
+            </label>
+            <textarea cols="50" rows="5" id="userNameTextArea" value="＜例＞織田信長、豊臣秀吉、徳川家康" placeholder="出席番号順に名前を入力（名前と名前の間を全角の「、」で区切る）"
+			></textarea>
+			<button type="button" id="submitRName" class="blockElement">確定</button>
+		</div>
+		<div id="SVGScreen" class="hiddenElement">
+			<label class="ruleSentence hiddenElement" id="inputUserName">生徒名を入力
+				<input type="text" id="UserName" class="blockElement" value="" placeholder="生徒名を入力">
+			</label>
+            <label class="ruleSentence hiddenElement" id="inputUserNumber">番号を入力
+                <input type="number" id="UserNumber" class="blockElement" value="" placeholder="番号を入力"></label>
+			<button type="button" id="start_endSelectDesk" class="blockElement">開始</button>
+			<label class="ruleSentence hiddenElement" id="selectUserName">生徒名を選択
+			<select id="selectName" name="selectName" class="blockElement"></select>
+			</label>
+			<svg viewBox="0 0 990 700" xmlns="http://www.w3.org/2000/svg" id="SVGsheet">
+			  <rect x="0" y="0" width="990" height="700" fill="white" />
+				<g stroke="black" fill="white" stroke-width="1" id="deskCanvas"></g>
+				<g font-size="18" text-anchor="middle" id="SVGcanvas"></g>
+			</svg>
+		</div>
+	</body>
+<script src="main.js"></script>
+<script src="RoomSetting.js"></script>
+<script src="RoomNameSetting.js"></script>
+<script src="useSVGcanvas.js"></script>
+
+
+</html>

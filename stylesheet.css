@@ -1,0 +1,98 @@
+body{
+    background-color: white;
+}
+select{
+    font-size: 28px;
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    margin: 0 auto;
+}
+label{
+text-align: center;
+}
+button{
+    font-size: 27px;
+    width: 250px;
+    height: 40px;
+    margin: 30px auto;
+}
+input[type="text"],input[type="number"]{
+    width: 120px;
+    height: 40px;
+    margin: 15px auto;
+}
+#SVGScreen{
+    margin: 0 auto;
+}
+.ruleSentence{
+    color: black;
+    font-family: serif;
+    font-size: large;
+}
+#RoomSettingWrap{
+    width: 990px;
+    height: 700px;
+    background-color: rgb(182, 234, 253);
+    border: 2px solid #aaa;
+    margin: 2px auto;
+}
+#RoomSetting{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+#blackboard{
+    color: black;
+    font-family: sans-serif;
+    font-size: 30px;
+    width: 420px;
+    height: 45px;
+    text-align: center;
+    margin: 2px auto;
+    border: 2px solid #aaa;
+}
+.desks{
+    width: 150px;
+    height: 70px;
+    margin-top: 8px;
+}
+div[data-removed="false"]{
+    background-color: darkseagreen;
+    border: 2px solid #aaa;
+    border-radius: 7px;
+}
+div[data-removed="true"]{
+    background-color:rgb(182, 234, 253);
+    border: 2px solid rgb(122, 116, 116);
+    border-radius: 0;
+}
+.hiddenElement{
+    display: none;
+}
+.blockElement{
+    display: block;
+}
+#progressWrap{
+display: flex;
+justify-content: left;
+}
+.progress{
+display: block;
+font-family: serif;
+font-size: 17px;
+width: 120px;
+text-align: center;
+height: 50px;
+}
+div[data-progress="true"]{
+background-color: red;
+color: white;
+}
+div[data-progress="false"]{
+background-color: yellow;
+color: brack;
+}
+.rotation{
+    transform: translateY(10em) rotateZ(90deg);
+}
