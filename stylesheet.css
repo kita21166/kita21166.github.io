@@ -16,6 +16,7 @@ button{
     width: 250px;
     height: 40px;
     margin: 30px auto;
+    background−color: #cecedf;
 }
 input[type="text"],input[type="number"]{
     width: 120px;
@@ -32,7 +33,7 @@ input[type="text"],input[type="number"]{
 }
 #RoomSettingWrap{
     width: 990px;
-    height: 650px;
+    height: 600px;
     background-color: rgb(182, 234, 253);
     border: 2px solid #aaa;
     margin: 8px auto;
