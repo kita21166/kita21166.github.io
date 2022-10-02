@@ -34,7 +34,7 @@ font-family: serif;
 font-size: large;
 }
 #RoomSettingWrap{
-width: 840px;
+width: 780px;
 height: 780px;
 margin: 8px auto;
 }
@@ -43,33 +43,32 @@ display: flex;
 justify-content: space-around;
 flex-wrap: wrap;
 border: 2px solid #aaa;
-background-color: rgb(182, 234, 253);
+background-color: rgb(190, 244, 255);
 }
 #blackboard{
 color: black;
 font-family: sans-serif;
-font-size: 28px;
+font-size: 30px;
 width: 300px;
 height: 43px;
 text-align: center;
-margin: 4px auto;
+margin: 10px auto;
 border: 1px solid #aaa;
 }
 .desks{
 width: 100px;
 height: 60px;
-margin: 4px 8px 6px 4px;
+margin: 8px 8px 8px 8px;
+border-radius: 5px;
 }
 div[data-removed="false"]{
 background-color: darkseagreen;
 border: 2px solid #aaa;
-border-radius: 7px;
-box-shadow: 0 2px 2px
+box-shadow: 0 1px 2px
 }
 div[data-removed="true"]{
-background-color:rgb(182, 234, 253);
-border: 2px solid rgb(122, 116, 116);
-border-radius: 7px;
+background-color:rgb(190, 244, 255);
+border: 2px solid rgba(0, 0, 0,0.1);
 }
 .hiddenElement{
 display: none;
