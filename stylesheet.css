@@ -16,7 +16,7 @@ button{
     width: 250px;
     height: 40px;
     margin: 30px auto;
-    background−color: #ccd;
+    background-color: #ccd;
 }
 input[type="text"],input[type="number"]{
     width: 120px;
