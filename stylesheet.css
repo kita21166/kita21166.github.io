@@ -34,7 +34,7 @@ font-family: serif;
 font-size: large;
 }
 #RoomSettingWrap{
-width: 850px;
+width: 840px;
 height: 780px;
 margin: 8px auto;
 }
@@ -52,14 +52,13 @@ font-size: 28px;
 width: 300px;
 height: 43px;
 text-align: center;
-margin: 2px auto;
-border: 2px solid #aaa;
+margin: 4px auto;
+border: 1px solid #aaa;
 }
 .desks{
-width: 120px;
+width: 100px;
 height: 60px;
-margin-top: 4px;
-margin-bottom: 6px;
+margin: 4px 8px 6px 4px;
 }
 div[data-removed="false"]{
 background-color: darkseagreen;
