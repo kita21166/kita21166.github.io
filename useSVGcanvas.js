@@ -1,3 +1,4 @@
+"use strict";
 const SVGscreen = document.getElementById("SVGScreen"); 
 const start_endButton = document.getElementById("start_endSelectDesk");
 const userNumArea = document.getElementById("UserNumber");
@@ -5,18 +6,38 @@ const selectNameArea = document.getElementById("selectName");
 const deskCanvas = document.getElementById("deskCanvas");
 const SVGcanvas = document.getElementById("SVGcanvas");
 const dates = new Date();
-let or = true;
-let currentUserName;
-const hideElementIfexist = function(ele){
-	if(ele){
-		ele.className = "hiddenElement"
-	};
+const deskWidth = 150;
+const deskHeight = 70;
+const desksMargin = 10;
+const startlineX = 20;
+const startlineY = 61;
+const namePaddingX = 75;
+const namePaddingY = 35;
+const placeName = [];
+const userNums = [];
+let interval = 0;
+let ShouldInputNumber= true;
+let currentUserName = howManyStudents;
+let randomWhereNum, Animeid, howManyRest, userNameForOut;
+document.getElementById('RoomSettingOption').onclick = () => 
+location.href = "RoomSetting.html";
+document.getElementById('StudentNameOption').onclick = () =>
+location.href = "StudentName.html";
+window.onload = function () {
+    if(localStorage.length !== 0){
+        document.getElementById("alert").textContent = "保存された設定内容があります";
+    }
+    notAvailableDesks = localStorage.getItem("notAvailableDesks") ? 
+        JSON.parse(localStorage.getItem("notAvailableDesks")) : [];
+    howManyStudents = defaultDeskNumber - notAvailableDesks.length;
+    howManyRest = howManyStudents;
+    RoomName = localStorage.getItem("RoomName") ? localStorage.getItem("RoomName") : "";
+    StudentName = localStorage.getItem("StudentName") ? 
+        JSON.parse(localStorage.getItem("StudentName")) : [];
+    document.title = `席替え＜席替え(${howManyStudents}人)＞`;
+    SVGmb();
 }
 const putButtonSVG = function(){
-    localStorage.setItem("WhereAre",JSON.stringify(WhereAre));
-    localStorage.setItem("removedDesks",JSON.stringify(RemovedDesks));
-    localStorage.setItem("howMany",JSON.stringify(howManyRest));
-    localStorage.setItem("userNames",JSON.stringify(userNames));
     const DLbutton = document.createElement("button");
     DLbutton.type = "button";
     DLbutton.textContent = "保存";
@@ -39,50 +60,40 @@ const putButtonSVG = function(){
 		preparePrint();
     })
 }
-const preparePrint = function(){
-	document.title = `${WhereAre} 座席表 ${dates.getMonth()+1}_${dates.getDate()}～` ;
-	document.body.removeChild(document.getElementById("progressWrap"));
-	hideElementIfexist(document.getElementById("inputUserNumber"));
-	hideElementIfexist(document.querySelector("button[type='button']"));
-	SVGscreen.className = "blockElement rotation";
-}
 const SVGmb = function() {
-    howManyRest = howMany;
-	SVGscreen.className = "blockElement";
-	if(screen.availWidth > 960){
+	if(screen.availWidth > 600){
 		SVGscreen.style.width = `${(screen.availWidth)/2}px`;
 	}else{
-		SVGscreen.style.width = "480px";
+		SVGscreen.style.width = "300px";
 	}
 	const placeRect = [];
 	for(let i = 0; i < 7; i++){
 		for(let j = 0; j < 6; j++){
-			placeName.push([95 +( j *160),61+(i*80)])
+			placeName.push([startlineX + namePaddingX +( j * (deskWidth + desksMargin)),startlineY + namePaddingY +(i*(deskHeight + desksMargin))])
 		}
 	}
-	for(let i = RemovedDesks.length; i > 0; i--){
-		placeName.splice(RemovedDesks[i-1],1);
+	for(let i = notAvailableDesks.length; i > 0; i--){
+		placeName.splice(notAvailableDesks[i-1],1);
 	}
 	placeName.forEach(ele => {
 		const [Xplace,Yplace] = ele;
-		placeRect.push([Xplace - 75, Yplace - 31]);
+		placeRect.push([Xplace - namePaddingX, Yplace - namePaddingY]);
 	});
 	let p = ""
 	for (let i = 0; i < placeRect.length; i++) {
 		p += `<rect x="${placeRect[i][0]}" y="${placeRect[i][1]}" width="150" height="70" />`;
 	}
 	deskCanvas.insertAdjacentHTML("beforeend", p);
-	SVGcanvas.insertAdjacentHTML("beforeend",`<text x="150" y="20">${WhereAre}</text><text x="50" y="20">${dates.getMonth()+1}/${dates.getDate()}~</text>`);
-	if (localStorage.getItem("userNames") === null) {
+	SVGcanvas.insertAdjacentHTML("beforeend",`<text x="150" y="20">${RoomName}</text><text x="50" y="20">${dates.getMonth()+1}/${dates.getDate()}~</text>`);
+	if (StudentName.length === 0) {
 		document.getElementById("inputUserNumber").className = "ruleSentence blockElement";
 		userNumArea.focus();
 		start_endButton.addEventListener("click", startRandomChangeByInput);
-	} else if(localStorage.getItem("userNames") !== null){
-		or = false;
-			const optionNames = JSON.parse(localStorage.getItem("userNames"));
-			for (let i = 0; i < howMany; i++) {
+	} else if(StudentName.length > 0){
+		ShouldInputNumber = false;
+			for (let i = 0; i < howManyStudents; i++) {
 				const nameOption = document.createElement("option");
-                const userName = optionNames[i]
+                const userName = StudentName[i]
 				nameOption.value = userName;
 				nameOption.id = userName;
 				nameOption.textContent = userName;
@@ -96,21 +107,25 @@ const SVGmb = function() {
 const startRandomChangeByInput = function(){
 	let userNum = userNumArea.value;
 if(!userNum){
-	userNum = howMany;
+	userNum = howManyStudents;
 }
 	start_endButton.removeEventListener("click",startRandomChangeByInput);
 	startRandomChange(userNum);
 }
 const startRandomChange = function(userName){
-	howMany--;
-if(howMany){
+	if(document.getElementById("optionButtons")){
+		document.body.removeChild(document.getElementById("optionButtons"));
+	}
+	howManyStudents--;
+if(howManyStudents > 1){
 	randomWhereNum = 99;
 	currentUserName = userName;
-	Animeid = setInterval(randomAnime,300,userName);
+	userNameForOut = userName;
+	Animeid = requestAnimationFrame(randomAnime);
 	start_endButton.textContent = "停止";
 	start_endButton.addEventListener("click",stopRandomChange);
 }else{
-SVGcanvas.insertAdjacentHTML("beforeend",`<text x="${placeName[0][0]}" y="${placeName[0][1]}">${userName}</text>`);
+	SVGcanvas.insertAdjacentHTML("beforeend",`<text x="${placeName[0][0]}" y="${placeName[0][1]}">${userName}</text>`);
 		SVGscreen.removeChild(start_endButton);
 		SVGscreen.removeChild(document.getElementById("selectUserName"));
 }
@@ -121,7 +136,12 @@ const startRandomChangeBySelect = function(){
 	start_endButton.removeEventListener("click",startRandomChangeBySelect);
 	startRandomChange(userName);
 }
-const randomAnime = function(userName) {
+const randomAnime = function() {
+	if(interval < 3){
+		interval ++;
+	}else{
+		interval = 0;
+	const userName = userNameForOut
 	let preSelectNum = parseInt(Math.random() * placeName.length);
 if(preSelectNum === randomWhereNum){
 	searchDifferentNumber:
@@ -135,7 +155,7 @@ break searchDifferentNumber;
 		if (randomWhereNum !== 99) {
 			randomWhereNum = preSelectNum;
 			const [x1, y1] = placeName[randomWhereNum];
-			const userNameText = SVGcanvas.lastChild
+			const userNameText = SVGcanvas.lastChild;
 userNameText.setAttribute("x",`${x1}`);
 userNameText.setAttribute("y",`${y1}`);
 		}else{
@@ -143,16 +163,21 @@ userNameText.setAttribute("y",`${y1}`);
 			const [x1, y1] = placeName[randomWhereNum];
 			SVGcanvas.insertAdjacentHTML("beforeend", `<text x="${x1}" y="${y1}">${userName}</text>`);
 		}
+	}
+	Animeid = requestAnimationFrame(randomAnime);
 }
 const stopRandomChange = function() {
-	clearInterval(Animeid);
-	placeName.splice(randomWhereNum, 1);
+	cancelAnimationFrame(Animeid);
+	if(ShouldInputNumber){
+		placeName.splice(randomWhereNum, 1);
 		start_endButton.removeEventListener("click", stopRandomChange);
 		start_endButton.textContent = "開始";
-		if(or){
-			userNumArea.value = parseInt(currentUserName) + 1;
-			start_endButton.addEventListener("click",startRandomChangeByInput);
-		}else{
+		userNumArea.value = parseInt(currentUserName) + 1;
+		start_endButton.addEventListener("click",startRandomChangeByInput);
+	}else{
+		if(howManyStudents === 1){
+			
+		}
 			start_endButton.addEventListener("click", startRandomChangeBySelect);
 		}
 }
