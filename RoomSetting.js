@@ -1,14 +1,15 @@
-const roomSetting = document.getElementById("RoomSetting"); 
+"use strict";
+const roomSetting = document.getElementById("RoomSetting");
 const setRoomSetting = function() {
 	for (let i = 0; i < defaultDeskNumber; i++) {
 		const desk = document.createElement("div");
 		desk.className = "desks";
-		desk.dataset.number = `${i}`;
+		desk.dataset.number = `${i}`
 		desk.dataset.removed = "false";
 		roomSetting.append(desk);
 		desk.addEventListener("click", removeDesk);
 	}
-	completeButton.addEventListener("click", checkRemovedDesks);
+	document.getElementById("CompleteRoomSetting").addEventListener("click", checkRemovedDesks);
 }
 const removeDesk = function() {
 	this.dataset.removed = "true";
@@ -22,15 +23,16 @@ const cancelRemoveDesk = function() {
 }
 const checkRemovedDesks = function() {
 	const desk = roomSetting.children;
-	WhereAre = document.getElementById("RoomNameSetting").value;
+	const RoomName = document.getElementById("RoomNameSetting").value;
+	const notAvailableDesks = [];
 	for (let i = 0; i < defaultDeskNumber; i++) {
 		if(desk[i].dataset.removed==="true"){
-			RemovedDesks.push(i);
+			notAvailableDesks.push(i);
 		}
 	}
-    howMany = defaultDeskNumber - RemovedDesks.length;
-	window.alert(`${WhereAre}の${howMany}人分の席が登録されました。`);
-	document.body.removeChild(document.getElementById("RoomSettingWrap"));
-    document.title = "席替え＜振り分け＞";
-	SVGmb();
+	window.alert(`${RoomName}の${defaultDeskNumber - notAvailableDesks.length}人分の席が登録されました。`);
+	localStorage.setItem("RoomName",RoomName);
+	localStorage.setItem("notAvailableDesks",JSON.stringify(notAvailableDesks));
+	location.href = "index.html";
 }
+window.onload = setRoomSetting();
