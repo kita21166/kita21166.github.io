@@ -22,7 +22,7 @@ let randomWhereNum, Animeid, howManyRest, userNameForOut;
 document.getElementById('RoomSettingOption').onclick = () => 
 location.href = "RoomSetting.html";
 document.getElementById('StudentNameOption').onclick = () =>
-location.href = "StudentName.php";
+location.href = "StudentName.html";
 window.onload = function () {
     if(localStorage.length !== 0){
         document.getElementById("alert").textContent = "保存された設定内容があります";
