@@ -17,5 +17,6 @@
             </thead>
             <tbody></tbody>
         </table>
+	    <?php echo "script: php" ?>
     </body>
     </html>
