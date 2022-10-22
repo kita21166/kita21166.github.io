@@ -1,25 +1,28 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="stylesheet.css">
-        <link rel="icon" href="sekigaeIcon.ico">
-		<title>
-			席替え＜座席組設定＞
-		</title>
-	</head>
-	<body>
-        <div id="RoomSettingWrap">
-            <span class="ruleSentence">7列＊６行　無効にする席を選択</span>
-            <div id="RoomSetting"></div>
-            <div id="teacher">教卓</div>
-            <label class="ruleSentence blockElement">R名を入力
-                <input type="text" id="RoomNameSetting" value="R" class="blockElement">
-                </label>
-                <button type="button" id="CompleteRoomSetting" class="blockElement">座席設定を送信</button>
-        </div>
-        <script src="main.js"></script>
-        <script src="RoomSetting.js"></script>
-        </body>
-        </html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="icon" href="sekigaeIcon.ico">
+    <title>
+        席替え＜座席組設定＞
+    </title>
+</head>
+
+<body>
+    <div id="RoomSettingWrap">
+        <label class="ruleSentence blockElement">R名を入力
+            <input type="text" id="RoomNameSetting" value="R" class="blockElement">
+        </label>
+        <span class="ruleSentence">7列＊６行　無効にする席を選択</span>
+        <div id="RoomSetting"></div>
+        <div id="teacher">教卓</div>
+        <button type="button" id="CompleteRoomSetting" class="blockElement">座席設定を送信</button>
+    </div>
+    <script src="main.js"></script>
+    <script src="RoomSetting.js"></script>
+</body>
+
+</html>

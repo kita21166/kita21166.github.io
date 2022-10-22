@@ -1,33 +1,39 @@
 <!DOCTYPE HTML>
 <html lang="ja">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="stylesheet.css">
-        <link rel="icon" href="sekigaeIcon.ico">
-		<title>
-			席替え＜席替え（42人）＞
-		</title>
-	</head>
-	<body>
-		<div id="optionButtons">
-			<div id="alert" class="ruleSentence">座席組・生徒名を設定してください</div>
-			<button type="button" id="RoomSettingOption" class="blockElement optionButton">座席組設定</button>
-			<button type="button" id="StudentNameOption" class="blockElement optionButton">生徒名設定</button></div>
-		<div id="SVGScreen" class="blockElement">
-            <label class="ruleSentence hiddenElement" id="inputUserNumber">番号を入力
-                <input type="number" id="UserNumber" class="blockElement" value="" placeholder="番号を入力"></label>
-			<label class="ruleSentence hiddenElement" id="selectUserName">生徒名を選択
-			<select id="selectName" name="selectName" class="blockElement"></select>
-			</label>
-			<button type="button" id="start_endSelectDesk" class="blockElement" data-function="start">開始</button>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="stylesheet.css">
+	<link rel="icon" href="sekigaeIcon.ico">
+	<title>
+		席替え＜席替え（42人）＞
+	</title>
+</head>
+
+<body>
+	<div id="wrap">
+		<div id="SVGScreen" class="bigsizewindow">
 			<svg viewBox="0 0 990 700" xmlns="http://www.w3.org/2000/svg" id="SVGsheet">
-			  <rect x="0" y="0" width="990" height="700" fill="white" />
+				<rect x="0" y="0" width="990" height="700" fill="white" />
 				<g stroke="black" fill="white" stroke-width="1" id="deskCanvas"></g>
-				<g font-size="28" text-anchor="middle" id="SVGcanvas"></g>
+				<g font-size="26" font-family="serif" text-anchor="middle" id="SVGcanvas"></g>
 			</svg>
 		</div>
-		<script src="main.js"></script>
-		<script src="useSVGcanvas.js"></script>
-	</body>
+		<div id="optionButtons">
+			<span id="alert" class="ruleSentence">座席組・生徒名を設定してください</span>
+			<button type="button" id="RoomSettingOption" class="blockElement optionButton">座席組設定</button>
+			<button type="button" id="StudentNameOption" class="blockElement optionButton">生徒名設定</button>
+			<label class="ruleSentence hiddenElement" id="inputUserNumber">番号を入力<input type="number" id="UserNumber"
+				class="blockElement" value="" placeholder="番号を入力"></label><label class="ruleSentence hiddenElement"
+			id="selectUserName">生徒名を選択<select id="selectName" name="selectName"
+				class="blockElement"></select></label>
+		<button type="button" id="start_endSelectDesk" class="blockElement">開始</button>
+			<div id="ReStartButton" data-IsAble="false">振り直し</div>
+		</div>
+	</div>
+	<script src="main.js"></script>
+	<script src="useSVGcanvas.js"></script>
+</body>
+
 </html>
