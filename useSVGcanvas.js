@@ -60,7 +60,7 @@ window.onload = function () {
 		p += `<rect x="${placeRect[i][0]}" y="${placeRect[i][1]}" width="150" height="70" />`;
 	}
 	document.getElementById("deskCanvas").insertAdjacentHTML("beforeend", p);
-	SVGcanvas.insertAdjacentHTML("beforeend", `<text x="150" y="20">${RoomName}</text><text x="50" y="20">
+	SVGcanvas.insertAdjacentHTML("beforeend", `<text x="150" y="20">${RoomName}　
 									${dates.getMonth() + 1}/${dates.getDate()}~</text>`);
 	if (StudentName.length === 0) {
 		document.getElementById("inputUserNumber").className = "ruleSentence blockElement";
